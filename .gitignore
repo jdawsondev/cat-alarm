@@ -7,3 +7,4 @@ build/
 detections/
 .venv/
 yolov8n.pt
+.claude
