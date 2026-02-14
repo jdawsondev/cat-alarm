@@ -29,6 +29,7 @@ class DetectionPipeline:
             blur_kernel_size=config.motion.blur_kernel_size,
             threshold=config.motion.threshold,
             min_contour_area=config.motion.min_contour_area,
+            consecutive_frames=config.motion.consecutive_frames,
         )
         self._storage = DetectionStorage(config.storage.output_dir)
         self._target_animals = {
@@ -36,6 +37,8 @@ class DetectionPipeline:
         }
         self._cooldowns: dict[str, float] = {}
         self._cooldown_sec = config.notification.cooldown_seconds
+        self._classify_cooldown_sec = config.classification.cooldown_seconds
+        self._last_classification: float = 0
         self._frame_interval = 1.0 / config.camera.fps
 
     def run(self) -> None:
@@ -50,7 +53,17 @@ class DetectionPipeline:
                     continue
 
                 if self._motion.detect(frame):
+                    now = time.monotonic()
+                    if (now - self._last_classification) < self._classify_cooldown_sec:
+                        log.debug("Motion detected but classification on cooldown, skipping")
+                        elapsed = time.monotonic() - start
+                        sleep_time = self._frame_interval - elapsed
+                        if sleep_time > 0:
+                            time.sleep(sleep_time)
+                        continue
+
                     log.debug("Motion detected, classifying frame...")
+                    self._last_classification = now
                     result = self._classifier.classify(frame)
 
                     if result and result.animal_detected:

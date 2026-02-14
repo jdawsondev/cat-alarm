@@ -20,11 +20,13 @@ class MotionConfig:
     blur_kernel_size: int = 21
     threshold: int = 25
     min_contour_area: int = 500
+    consecutive_frames: int = 3
 
 
 @dataclass
 class ClassificationConfig:
     model: str = "claude-haiku-4-5-20251001"
+    cooldown_seconds: int = 30
     target_animals: list[str] = field(default_factory=lambda: ["cat", "raccoon"])
 
 

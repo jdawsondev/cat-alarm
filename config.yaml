@@ -7,9 +7,11 @@ motion:
   blur_kernel_size: 21
   threshold: 25
   min_contour_area: 500
+  consecutive_frames: 3
 
 classification:
   model: claude-haiku-4-5-20251001
+  cooldown_seconds: 30
   target_animals:
     - cat
     - raccoon
