@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cat-alarm"
+version = "0.1.0"
+description = "Doorstep animal detection using motion sensing and Claude Vision"
+requires-python = ">=3.10"
+dependencies = [
+    "opencv-python>=4.9",
+    "anthropic>=0.40",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "plyer>=2.1",
+]
+
+[project.scripts]
+cat-alarm = "cat_alarm.main:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

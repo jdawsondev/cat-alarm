@@ -1,0 +1,23 @@
+camera:
+  type: webcam
+  device_index: 0
+  fps: 2
+
+motion:
+  blur_kernel_size: 21
+  threshold: 25
+  min_contour_area: 500
+
+classification:
+  model: claude-haiku-4-5-20251001
+  target_animals:
+    - cat
+    - raccoon
+
+notification:
+  type: desktop
+  cooldown_seconds: 300
+  title_template: "Cat Alarm: {animal_type} detected!"
+
+storage:
+  output_dir: ./detections
