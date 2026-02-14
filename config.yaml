@@ -1,3 +1,5 @@
+log_level: DEBUG
+
 camera:
   type: webcam
   device_index: 0
@@ -10,7 +12,9 @@ motion:
   consecutive_frames: 3
 
 classification:
+  backend: yolo
   model: claude-haiku-4-5-20251001
+  yolo_model: yolov8n.pt
   cooldown_seconds: 30
   target_animals:
     - cat

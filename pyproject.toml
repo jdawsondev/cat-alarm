@@ -13,6 +13,7 @@ dependencies = [
     "pyyaml>=6.0",
     "python-dotenv>=1.0",
     "plyer>=2.1",
+    "ultralytics>=8.0",
 ]
 
 [project.scripts]

@@ -25,7 +25,9 @@ class MotionConfig:
 
 @dataclass
 class ClassificationConfig:
+    backend: str = "claude"
     model: str = "claude-haiku-4-5-20251001"
+    yolo_model: str = "yolov8n.pt"
     cooldown_seconds: int = 30
     target_animals: list[str] = field(default_factory=lambda: ["cat", "raccoon"])
 
@@ -50,6 +52,7 @@ class AppConfig:
     notification: NotificationConfig
     storage: StorageConfig
     anthropic_api_key: str = ""
+    log_level: str = "INFO"
 
 
 def load_config(config_path: str = "config.yaml", env_path: str = ".env") -> AppConfig:
@@ -68,4 +71,5 @@ def load_config(config_path: str = "config.yaml", env_path: str = ".env") -> App
         notification=NotificationConfig(**yaml_data.get("notification", {})),
         storage=StorageConfig(**yaml_data.get("storage", {})),
         anthropic_api_key=os.environ.get("ANTHROPIC_API_KEY", ""),
+        log_level=yaml_data.get("log_level", "INFO"),
     )

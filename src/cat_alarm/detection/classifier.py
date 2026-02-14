@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import abc
 import base64
 import json
 import logging
@@ -20,7 +21,12 @@ class ClassificationResult:
     description: str
 
 
-class AnimalClassifier:
+class Classifier(abc.ABC):
+    @abc.abstractmethod
+    def classify(self, frame: np.ndarray) -> ClassificationResult | None: ...
+
+
+class AnimalClassifier(Classifier):
     def __init__(self, api_key: str, model: str = "claude-haiku-4-5-20251001"):
         self._client = anthropic.Anthropic(api_key=api_key)
         self._model = model
