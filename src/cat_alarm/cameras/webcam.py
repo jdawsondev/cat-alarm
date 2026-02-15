@@ -21,6 +21,8 @@ class WebcamSource(CameraSource):
             raise RuntimeError(
                 f"Failed to open webcam at index {self._device_index}"
             )
+        self._cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
+        self._cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 1080)
         log.info("Webcam opened (device %d)", self._device_index)
 
     def read_frame(self) -> np.ndarray | None:
