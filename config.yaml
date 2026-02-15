@@ -15,14 +15,14 @@ classification:
   backend: yolo
   model: claude-haiku-4-5-20251001
   yolo_model: yolov8n.pt
-  cooldown_seconds: 15
+  cooldown_seconds: 5
   target_animals:
     - cat
     - raccoon
 
 notification:
   type: desktop
-  cooldown_seconds: 300
+  cooldown_seconds: 60
   title_template: "Cat Alarm: {animal_type} detected!"
 
 storage:
