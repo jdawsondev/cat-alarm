@@ -8,7 +8,8 @@ camera:
 motion:
   blur_kernel_size: 21
   threshold: 25
-  min_contour_area: 500
+  # May need increasing for 1080p (contour areas scale with resolution)
+  min_contour_area: 3000
   consecutive_frames: 3
 
 classification:
