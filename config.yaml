@@ -8,15 +8,14 @@ camera:
 motion:
   blur_kernel_size: 21
   threshold: 25
-  # May need increasing for 1080p (contour areas scale with resolution)
-  min_contour_area: 3000
+  min_contour_area: 500
   consecutive_frames: 3
 
 classification:
   backend: yolo
   model: claude-haiku-4-5-20251001
   yolo_model: yolov8n.pt
-  cooldown_seconds: 30
+  cooldown_seconds: 15
   target_animals:
     - cat
     - raccoon
