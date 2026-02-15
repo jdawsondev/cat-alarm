@@ -74,6 +74,8 @@ class AnimalClassifier(Classifier):
             return None
 
         text = response.content[0].text.strip()
+        if text.startswith("```"):
+            text = text.split("\n", 1)[1].rsplit("```", 1)[0].strip()
         try:
             data = json.loads(text)
         except json.JSONDecodeError:
